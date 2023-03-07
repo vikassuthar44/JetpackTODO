@@ -14,5 +14,7 @@ data class CategoryEntity(
     var categoryName:String,
     @DrawableRes
     @ColumnInfo(name = "cat_icon")
-    var catIcon:Int
+    var catIcon:Int,
+    @ColumnInfo(name = "task_count")
+    var taskCount:Int
 )

@@ -94,7 +94,7 @@ fun BodyContent(context: Context?, viewModel: ScheduleViewModel) {
 @Composable
 fun OngoingTask(viewModel: ScheduleViewModel) {
     val ongoingTaskList = TaskDataSource.getOnGoingTask()
-    val taskList = viewModel.getTodayGoingTask().observeAsState(arrayListOf())
+    val taskList = viewModel.taskList.observeAsState(arrayListOf())
     LazyColumn {
         items(taskList.value) { singleOnGoinTask ->
             SingleOnGoingTask(singleTask = singleOnGoinTask)

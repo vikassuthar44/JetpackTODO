@@ -80,9 +80,11 @@ class CreateTaskViewModel @Inject constructor(
     }
 
     fun getAllData() {
-        tasklist = taskRepository.readAllTask
+        viewModelScope.launch {
+            _taskList?.value = taskRepository.readAllTask()
+        }
 
-        val taskLists: List<TaskEntity>? = tasklist!!.value
+        /*val taskLists: List<TaskEntity>? = tasklist!!.value
 
         try {
             if (taskLists?.size!! > 0) {
@@ -92,7 +94,7 @@ class CreateTaskViewModel @Inject constructor(
             }
         } catch (e: Exception) {
             Log.d("CreateTaskViewModel", "getAllData: ${e.message}")
-        }
+        }*/
 
     }
 

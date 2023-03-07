@@ -202,13 +202,10 @@ fun SingleProject(title:String, number:String) {
             modifier = Modifier
                 .background(
                     Color.White
-                    /* Brush.horizontalGradient(
-                        colors = listOf(
-                            colorResource(id = R.color.light_yellow),
-                            colorResource(id = R.color.purple_700)
-                        )
-                    )*/
                 )
+                .clickable {
+
+                }
                 .padding(all = 10.dp)
         ) {
             CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {

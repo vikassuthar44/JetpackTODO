@@ -158,7 +158,7 @@ fun MainScreen(context: Context?, mainViewModel: MainViewModel = hiltViewModel()
 
         ) {
         Scaffold(
-            modifier = Modifier.padding(all = 16.dp),
+            modifier = Modifier.padding(top = 16.dp, bottom = 50.dp),
             backgroundColor = MaterialTheme.colors.newBackground,
             topBar = {
                 AppTopBarView(context)
@@ -208,9 +208,10 @@ fun BodyContent(mainViewModel: MainViewModel) {
 
 @Composable
 fun OnGoingTask(mainViewModel: MainViewModel) {
-    val onGoingTasks = mainViewModel.getAllOnGoingTask().observeAsState(arrayListOf())
+    //val onGoingTasks = mainViewModel.getAllOnGoingTask().observeAsState(arrayListOf())
     val onGoingTask: List<OnGoingTask> = TaskDataSource.getOnGoingTask()
 
+    val onGoingTasks = mainViewModel.allTask.observeAsState(arrayListOf())
     LazyColumn {
         items(onGoingTasks.value) { onGoingTask ->
             SingleOnGoingTask(onGoingTask = onGoingTask)
@@ -325,10 +326,15 @@ fun SingleOnGoingTask(onGoingTask: TaskEntity) {
 
 @Composable
 fun SubTitle(subTitle: String) {
-    Text(
-        text = subTitle,
-        style = MaterialTheme.typography.button.copy(fontSize = 24.sp, fontWeight = FontWeight.Bold)
-    )
+    Box(modifier = Modifier.padding(horizontal = 16.dp)) {
+        Text(
+            text = subTitle,
+            style = MaterialTheme.typography.button.copy(
+                fontSize = 24.sp,
+                fontWeight = FontWeight.Bold
+            )
+        )
+    }
 }
 
 @Composable
@@ -422,7 +428,7 @@ fun AppTopBarView(context: Context?) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier
-            .padding(top = 16.dp)
+            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
             .fillMaxWidth()
     ) {
         Column(horizontalAlignment = Alignment.Start) {
