@@ -14,19 +14,21 @@ import javax.inject.Inject
 @HiltViewModel
 class ScheduleViewModel @Inject constructor(
     private val taskRepository: TaskRepository
-):ViewModel() {
+) : ViewModel() {
 
     private val _taskList = MutableLiveData<List<TaskEntity>>()
-    val taskList:LiveData<List<TaskEntity>> = _taskList
+    val taskList: LiveData<List<TaskEntity>> = _taskList
 
     init {
         getTodayGoingTask()
     }
-    private fun getTodayGoingTask()  {
+
+    private fun getTodayGoingTask() {
         viewModelScope.launch {
             val calendar = Calendar.getInstance()
-            val today = calendar.get(Calendar.DAY_OF_MONTH).toString() + " " + calendar.get(Calendar.MONTH) + " " + calendar.get(Calendar.YEAR)
-            val list =  (taskRepository.readAllTask()).apply {
+            val today = calendar.get(Calendar.DAY_OF_MONTH)
+                .toString() + " " + calendar.get(Calendar.MONTH) + " " + calendar.get(Calendar.YEAR)
+            val list = (taskRepository.readAllTask()).apply {
                 this.map {
                     it.taskStartDate == today
                 }
